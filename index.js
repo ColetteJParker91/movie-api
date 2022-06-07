@@ -40,6 +40,18 @@ let topMovies =[
                 
                 ]
 
+app.get('/', (req, res) => {
+  res.send('Welcome to information on Marvel movies');
+});
+
+app.get('/documentation', (req, res) => {
+  res.sendFile('public/documentation.html', { root: __dirname });
+});
+
+app.get('/movies', (req, res) => {
+  res.json(topMovies);
+});
+
 app.use(morgan('combined', {stream: accessLogStream}));
 
 app.use(express.static('public'));
