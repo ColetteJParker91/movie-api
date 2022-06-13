@@ -56,7 +56,7 @@ app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
 
-app.get('/movies/:title', req, res) => {
+app.get('/movies/:title', (req, res) => {
     const {title} = req.params;
     const movie = movies.find(movie => movie.title === title);
     if (movie){
@@ -64,7 +64,7 @@ app.get('/movies/:title', req, res) => {
     else {
         res.status (400).send('no such movie')
     }
-};
+});
 
 app.get('/movies/genre/:genreName', (req, res) => {
     const { genreName } = req.params;
@@ -75,7 +75,7 @@ app.get('/movies/genre/:genreName', (req, res) => {
     } else {
         res.status(400).send('no such genre')
     }
-};
+});
         
 app.get('/movies/directors/:directorName', (req, res) => {
     const { directorName } = req.params;
@@ -86,7 +86,7 @@ app.get('/movies/directors/:directorName', (req, res) => {
     } else {
         res.status(400).send('no such director')
             }
-    };
+    });
     
 app.post('/users', (req, res) => {
     const newUser = req.body;
@@ -98,7 +98,7 @@ app.post('/users', (req, res) => {
     } else {
                 res.status(400).send('user need names')
             }
-    };
+    });
         
 app.put('/users/:id', (req, res) => {
     const { id } = req.params;
@@ -112,7 +112,7 @@ app.put('/users/:id', (req, res) => {
     } else {
                 res.status(400).send('no such user');
             }
-    };
+    });
         
 app.post('/users/:id/:movieTitle', (req, res) => {
     const { id, movieTitle } = req.params;
@@ -125,7 +125,7 @@ app.post('/users/:id/:movieTitle', (req, res) => {
     } else {
                 res.status(400).send('did not add to favorites');
             }
-    };
+    });
          
 app.delete('/users/:id/:movieTitle', (req, res) => {
     const { id, movieTitle } = req.params;
@@ -139,7 +139,7 @@ app.delete('/users/:id/:movieTitle', (req, res) => {
     } else {
                  res.status(400).send('did not remove');
              }
-    };
+    });
            
 app.delete('/users/:id', (req, res) => {
     const { id } = req.params;
@@ -152,7 +152,7 @@ app.delete('/users/:id', (req, res) => {
     } else {
                    res.status(400).send('user has not been deleted');
                }
-    };
+    });
         
 app.use(morgan('combined', {stream: accessLogStream}));
 
