@@ -1,45 +1,79 @@
 const express = require('express');
-morgan = require ('morgan');
-fs = require('fs'), // import built in node modules fs and path
-  path = require('path');
-bodyParser = require('body-parser');
+app = express(),
+bodyParser = require('body-parser'),
 uuid = require('uuid');
+morgan = require('morgan');
 
-const app = express();
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
 
+let users = [
+             {
+                 id: 1,
+                 name: "Colette",
+             password:"",
+                 favoriteMovies: []
+             },
+             {
+                 id: 2,
+                 name: "John",
+                 password: "",
+                 favoriteMovies: ["Iron Man 2"]
+             },
+             ]
+
 let topMovies =[
-                {title: 'Iron Man',
-                    phase: '1'
+                {
+                title: 'Iron Man',
+                    phase: '1',
+                    director: 'Jon Favreau',
                 }
-                {title: 'The Incredible Hulk',
-                    phase: '1'
+                {
+                title: 'The Incredible Hulk',
+                    phase: '1',
+                    director: 'Louis Leterrier',
                 }
-                {title: 'Iron Man 2',
-                    phase: '1'
+                {
+                title: 'Iron Man 2',
+                    phase: '1',
+                    director: 'Jon Favreau',
                 }
-                {title: 'Thor',
-                    phase: '1'
+                {
+                title: 'Thor',
+                    phase: '1',
+                    director: 'Kenneth Branagh',
                 }
-                {title: 'Captain America: The First Avenger',
-                    phase: '1'
+                {
+                title: 'Captain America: The First Avenger',
+                    phase: '1',
+                    director: 'Joe Johnston',
                 }
-                {title: 'Marvel\'s The Avengers',
-                    phase: '1'
+                {
+                title: 'Marvel\'s The Avengers',
+                    phase: '1',
+                    director: 'Joss Whedon',
                 }
-                {title: 'Iron Man 3',
-                    phase: '2'
+                {
+                title: 'Iron Man 3',
+                    phase: '2',
+                    director: 'Shane Black',
                 }
-                {title: 'Thor: The Dark World',
-                    phase: '2'
+                {
+                title: 'Thor: The Dark World',
+                    phase: '2',
+                    director: 'Alan Taylor',
                 }
-                {title: 'Captain America: The Winter Soldier',
-                    phase: '2'
+                {
+                title: 'Captain America: The Winter Soldier',
+                    phase: '2',
+                    director: 'Anthony and Joe Russo',
                 }
-                {title: 'Guardians of the Galaxy',
-                    phase: '2'
+                {
+                title: 'Guardians of the Galaxy',
+                    phase: '2',
+                    director: 'James Gunn',
                 }
                 
                 ]
@@ -66,9 +100,9 @@ app.get('/movies/:title', (req, res) => {
     }
 });
 
-app.get('/movies/genre/:genreName', (req, res) => {
-    const { genreName } = req.params;
-    const genre = movies.find(movie => movie.genre.name === genreName).genre;
+app.get('/movies/phase/:phaseNumber', (req, res) => {
+    const { phaseNumber } = req.params;
+    const phase = movies.find(movie => movie.phase.number === phaseNumber).phase;
 
     if (genre) {
         res.status(200).json(genre);
