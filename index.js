@@ -27,7 +27,7 @@ let users = [
              },
              ]
 
-let topMovies =[
+let movies =[
                 {
                 title: 'Iron Man',
                     phase: '1',
