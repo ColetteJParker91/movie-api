@@ -1,10 +1,11 @@
 const express = require('express');
 app = express(),
-fs = require('fs'), // import built in node modules fs and path
-path = require('path');
+
 bodyParser = require('body-parser'),
 uuid = require('uuid');
 morgan = require('morgan');
+fs = require('fs'), // import built in node modules fs and path
+path = require('path');
 
 app.use(bodyParser.json());
 
