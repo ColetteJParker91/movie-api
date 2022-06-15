@@ -1,5 +1,7 @@
 const express = require('express');
 app = express(),
+fs = require('fs'), // import built in node modules fs and path
+path = require('path');
 bodyParser = require('body-parser'),
 uuid = require('uuid');
 morgan = require('morgan');
@@ -29,54 +31,54 @@ let topMovies =[
                 title: 'Iron Man',
                     phase: '1',
                     director: 'Jon Favreau',
-                }
+                },
                 {
                 title: 'The Incredible Hulk',
                     phase: '1',
                     director: 'Louis Leterrier',
-                }
+                },
                 {
                 title: 'Iron Man 2',
                     phase: '1',
                     director: 'Jon Favreau',
-                }
+                },
                 {
                 title: 'Thor',
                     phase: '1',
                     director: 'Kenneth Branagh',
-                }
+                },
                 {
                 title: 'Captain America: The First Avenger',
                     phase: '1',
                     director: 'Joe Johnston',
-                }
+                },
                 {
                 title: 'Marvel\'s The Avengers',
                     phase: '1',
                     director: 'Joss Whedon',
-                }
+                },
                 {
                 title: 'Iron Man 3',
                     phase: '2',
                     director: 'Shane Black',
-                }
+                },
                 {
                 title: 'Thor: The Dark World',
                     phase: '2',
                     director: 'Alan Taylor',
-                }
+                },
                 {
                 title: 'Captain America: The Winter Soldier',
                     phase: '2',
                     director: 'Anthony and Joe Russo',
-                }
+                },
                 {
                 title: 'Guardians of the Galaxy',
                     phase: '2',
                     director: 'James Gunn',
-                }
+                },
                 
-                ]
+                ];
 
 app.get('/', (req, res) => {
   res.send('Welcome to information on Marvel movies');
