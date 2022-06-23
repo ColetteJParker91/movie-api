@@ -1,7 +1,16 @@
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
+const Movies = Models.Movie;
+const Users = Models.User;
+
+mongoose.connect('mongodb://localhost:27017/test',{use NewURLParser: true, useUnifiedTopology: true)};
+
 const express = require('express');
 app = express(),
+                 app.use(body.parser.urlencoded({ extended: true}));
 
-bodyParser = require('body-parser'),
+const bodyParser = require('body-parser'),
 uuid = require('uuid');
 morgan = require('morgan');
 fs = require('fs'), // import built in node modules fs and path
@@ -125,17 +134,32 @@ app.get('/movies/directors/:directorName', (req, res) => {
             }
     });
     
-app.post('/users', (req, res) => {
-    const newUser = req.body;
+                 app.post('/users', (req, res) => {
+                   Users.findOne({ Username: req.body.Username })
+                     .then((user) => {
+                       if (user) {
+                         return res.status(400).send(req.body.Username + 'already exists');
+                       } else {
+                         Users
+                           .create({
+                             Username: req.body.Username,
+                             Password: req.body.Password,
+                             Email: req.body.Email,
+                             Birthday: req.body.Birthday
+                           })
+                           .then((user) =>{res.status(201).json(user) })
+                         .catch((error) => {
+                           console.error(error);
+                           res.status(500).send('Error: ' + error);
+                         })
+                       }
+                     })
+                     .catch((error) => {
+                       console.error(error);
+                       res.status(500).send('Error: ' + error);
+                     });
+                 });
 
-    if (newUser.name) {
-                newUser.id = uuid.v4();
-                users.push(newUser);
-                res.status(201).json(newUser)
-    } else {
-                res.status(400).send('user need names')
-            }
-    });
         
 app.put('/users/:id', (req, res) => {
     const { id } = req.params;
