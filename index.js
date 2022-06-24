@@ -7,7 +7,7 @@ const Users = Models.User;
 mongoose.connect('mongodb://localhost:27017/test',{use NewURLParser: true, useUnifiedTopology: true)};
 
 const express = require('express');
-app = express(),
+const app = express(),
                  app.use(body.parser.urlencoded({ extended: true}));
 
 const bodyParser = require('body-parser'),
