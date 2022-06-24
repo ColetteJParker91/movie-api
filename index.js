@@ -114,7 +114,7 @@ app.get('/movies/:Title', (req, res) => {
     .then((movie) => {
         res.json(movie);
     })
-   .catch((eer) => {
+   .catch((err) => {
        console.error(err);
         res.status (500).send('Error: ' + err);
     });
