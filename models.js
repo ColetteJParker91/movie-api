@@ -10,7 +10,6 @@ Director: {
     Name: String,
     Bio: String
 },
-    Actors: [String],
     ImagePath: String,
     Featured: Boolean
 });
