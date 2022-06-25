@@ -10,6 +10,11 @@ const express = require('express');
 const app = express();
 //                 app.use(body.parser.urlencoded({ extended: true}));
 
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
+
+
 const bodyParser = require('body-parser'),
 uuid = require('uuid');
 morgan = require('morgan');
@@ -98,7 +103,7 @@ app.get('/documentation', (req, res) => {
   res.sendFile('public/documentation.html', { root: __dirname });
 });
 
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
     .then ((movies) => {
         res.status(201).json(movies);
