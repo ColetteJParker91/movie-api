@@ -9,6 +9,8 @@ mongoose.connect('mongodb://localhost:27017/test', { useNewURLParser: true, useU
 const express = require('express');
 const app = express();
 //                 app.use(body.parser.urlencoded({ extended: true}));
+const cors = require('cors');
+app.use(cors());
 
 let auth = require('./auth')(app);
 const passport = require('passport');
@@ -24,7 +26,9 @@ path = require('path');
 app.use(bodyParser.json());
 
 
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
+
+const { check, validationResult } = require('express-validator');
 
 //let users = [
 //             {
@@ -170,7 +174,20 @@ app.get('/movies/directors/:directorName', (req, res) => {
                            });
                        });
 
-app.post('/users', (req, res) => {
+app.post('/users',
+         [
+             check('Username', 'Username is required').isLength({min: 5}),
+             check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+             check('Password', 'Password is required').not().isEmpty(),
+             check('Email', 'Email does not appear to be valid').isEmail()
+           ],
+         (req, res) => {
+    let errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+          return res.status(422).json({ errors: errors.array() });
+        }
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ Username: req.body.Username })
       .then((user) => {
         if (user) {
@@ -179,7 +196,7 @@ app.post('/users', (req, res) => {
           Users
             .create({
               Username: req.body.Username,
-              Password: req.body.Password,
+              Password: hashedPassword,
               Email: req.body.Email,
               Birthday: req.body.Birthday
             })
@@ -263,6 +280,32 @@ app.delete('/users/:Username', (req, res) => {
         res.status(500).send('Error: ' + err);
       });
   });
+
+passport.use(new LocalStrategy({
+  usernameField: 'Username',
+  passwordField: 'Password'
+}, (username, password, callback) => {
+  console.log(username + '  ' + password);
+  Users.findOne({ Username: username }, (error, user) => {
+    if (error) {
+      console.log(error);
+      return callback(error);
+    }
+
+    if (!user) {
+      console.log('incorrect username');
+      return callback(null, false, {message: 'Incorrect username.'});
+    }
+
+    if (!user.validatePassword(password)) {
+      console.log('incorrect password');
+      return callback(null, false, {message: 'Incorrect password.'});
+    }
+
+    console.log('finished');
+    return callback(null, user);
+  });
+}));
 
 app.use(morgan('combined', {stream: accessLogStream}));
 

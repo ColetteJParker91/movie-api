@@ -45,3 +45,4 @@
 ::1 - - [29/Jun/2022:18:00:08 +0000] "GET /user/charlie%20lawrence HTTP/1.1" 404 162 "-" "PostmanRuntime/7.29.0"
 ::1 - - [29/Jun/2022:18:00:33 +0000] "GET /users/elton%20john%20 HTTP/1.1" 404 160 "-" "PostmanRuntime/7.29.0"
 ::1 - - [29/Jun/2022:18:00:55 +0000] "GET /users/elton%20john%20 HTTP/1.1" 404 160 "-" "PostmanRuntime/7.29.0"
+::1 - - [29/Jun/2022:18:43:15 +0000] "POST /movies/genre/war HTTP/1.1" 404 156 "-" "PostmanRuntime/7.29.0"
