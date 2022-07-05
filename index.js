@@ -165,17 +165,7 @@ app.get('/movies/directors/:directorName', passport.authenticate('jwt', { sessio
               });
             });
 
-    
-                 app.post('/users', (req, res) => {
-                     Users.find()
-                           .then((users) => {
-                             res.status(201).json(users);
-                           })
-                           .catch((err) => {
-                             console.error(err);
-                             res.status(500).send('Error: ' + err);
-                           });
-                       });
+
 
 app.post('/users', passport.authenticate('jwt', { session: false }),
          [
