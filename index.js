@@ -221,14 +221,14 @@ app.post('/users',),
           .catch((error) => {
             console.error(error);
             res.status(500).send('Error: ' + error);
-          })
+          });
         }
       })
       .catch((error) => {
         console.error(error);
         res.status(500).send('Error: ' + error);
       });
-  });
+
 
 app.put('/users/:Username',[
     check('Username', 'Username is required').isLength({min: 5}),
