@@ -13,7 +13,7 @@ const express = require('express');
 const app = express();
 
 app.use(body.parser.urlencoded({ extended: true}));
-const cors = require('cors');
+
 
 const {check, validationResult } = require('express-validator');
 let allowedOrigins = ['https://localhost:8080', 'http://testsite.com'];
@@ -39,12 +39,14 @@ const morgan = require('morgan');
 fs = require('fs'), // import built in node modules fs and path
 path = require('path');
 
+const cors = require('cors');
+const { check, validationResult } = require('express-validator');
+
 app.use(bodyParser.json());
 app.use(morgan('common'))
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
 
-const { check, validationResult } = require('express-validator');
 
 //let users = [
 //             {
