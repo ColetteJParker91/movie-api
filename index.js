@@ -24,7 +24,7 @@ origin: (origin, callback) => {
           let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
           return callback(new Error(message ), false);
 }
-    return callback(null;true);
+    return callback(null, true);
 }
 }));
 
