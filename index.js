@@ -40,7 +40,6 @@ fs = require('fs'), // import built in node modules fs and path
 path = require('path');
 
 const cors = require('cors');
-const { check, validationResult } = require('express-validator');
 
 app.use(bodyParser.json());
 app.use(morgan('common'))
