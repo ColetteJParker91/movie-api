@@ -20,7 +20,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 
-const bodyParser = require('body-parser'),
+const bodyParser = require('body-parser');
 uuid = require('uuid');
 morgan = require('morgan');
 fs = require('fs'), // import built in node modules fs and path
