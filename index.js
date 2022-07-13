@@ -338,8 +338,6 @@ passport.use(new LocalStrategy({
              app.listen(port, '0.0.0.0',() => {
               console.log('Listening on Port ' + port);
              });
-             
-app.use(morgan('combined', {stream: accessLogStream}));
 
 app.use(express.static('public'));
 
