@@ -16,7 +16,7 @@ app.use(body.parser.urlencoded({ extended: true}));
 
 
 const {check, validationResult } = require('express-validator');
-let allowedOrigins = ['https://localhost:8080', 'http://testsite.com'];
+let allowedOrigins = ['https://localhost:8080', 'https://localhost;1234', 'http://testsite.com'];
 app.use(cors({
 origin: (origin, callback) => {
     if(!origin) return callback(null, true);
@@ -333,15 +333,15 @@ passport.use(new LocalStrategy({
     return callback(null, user);
   });
 }));
+             app.use(express.static('public'));
+
+            app.use((err, req, res, next) => {
+               console.error(err.stack);
+               res.status(500).send('Oops, something broke!');
+                          });
+
 
              const port = process.env.PORT || 8080;
              app.listen(port, '0.0.0.0',() => {
               console.log('Listening on Port ' + port);
              });
-
-app.use(express.static('public'));
-
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Oops, something broke!');
-});
