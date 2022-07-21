@@ -11,7 +11,7 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 //mongoose.connect('mongodb://localhost:27017/test', { useNewURLParser: true, useUnifiedTopology: true});
-mongoose.connect('mongodb+srv://myFlixDBadmin:eltontrixie2022@myflixdb.mdfng82.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect( process.env.CONNECTION_URI, {
     useNewURLParser: true,
     useUnifiedTopology: true
 });
