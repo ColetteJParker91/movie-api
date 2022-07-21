@@ -58,7 +58,7 @@ app.get('/documentation', passport.authenticate('jwt', {session: false}), (req, 
     res.sendFile('public/documentation.html', {root: __dirname});
 });
 
-app.get('/movies', function (req, res) => {
+app.get('/movies', function (req, res) {
     Movies.find()
         .then((movies) => {
             res.status(201).json(movies);
