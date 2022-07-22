@@ -16,7 +16,6 @@ mongoose.connect( process.env.CONNECTION_URI, {
     useUnifiedTopology: true
 });
 
-
 const app = express();
 
 app.use(bodyParser.json());
