@@ -15,7 +15,7 @@ Director: {
 },
     ImagePath: String,
     Featured: Boolean
-}, { collection: 'myMovies' }, {collection: 'users'});
+}, { collection: 'movies' }, {collection: 'users'});
 
 let userSchema = mongoose.Schema ({
 Username: {type: String, required: true},
