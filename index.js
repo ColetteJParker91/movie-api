@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 const {check, validationResult} = require('express-validator');
-let allowedOrigins = ['https://localhost:8080', 'https://localhost:1234', 'http://testsite.com'];
+let allowedOrigins = ['https://localhost:8080', 'http://localhost:1234', 'http://testsite.com'];
 app.use(cors({
     origin: (origin, callback) => {
         if (!origin) return callback(null, true);
