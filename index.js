@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser');
 const uuid = require('uuid');
 const morgan = require('morgan');
-const path = require('path');
 
 const passport = require('passport');
 const express = require('express');
