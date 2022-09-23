@@ -50,6 +50,9 @@ app.use(morgan('common'))
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
 
+app.get('/hello', (req, res) => {
+    res.send('Welcome to information on Colettes movies');
+});
 
 /**
  * Get: Returns welcome message
